@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css" />
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body ng-controller='contr' class="container">
+
+    <div class="container">
+    <form name='appIdForm' ng-controller='formController' ng-submit='refreshApp(params)' novalidate>
+        <div class="form-inline">
+            <label for='appId'>Введите номер приложения: </label>
+            <input ng-model='params.appId' type='number' id='appId' class="form-control" required/>
+            <input type='submit' class="btn btn-primary" value='Поиск'/>  
+        </div>
+        
+    </form>
+
+    
+    <h3>{{appInfo.id}}, {{appInfo.base}}</h3>
+
+    <br>
+
+  	<div ng-repeat='event in events'>
+
+      <div class="bg-info">
+        <b>{{event.time | date : "dd.MM.yyyy H:mm:ss"}}, Сеанс:{{event.sessionId}}, 
+          Пользователь:{{event.user}},
+         {{event.event}} </b>
+		<div ng-repeat='line in event.commentlines'>
+			<p >{{line}}<p>
+		</div>
+        
+      </div> <br>
+	       
+  	</div>
+
+    </div>
+  </body>
+</html>

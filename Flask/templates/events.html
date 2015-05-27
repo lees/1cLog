@@ -1,0 +1,69 @@
+
+<style>
+
+    .name {
+    font-weight: bold;
+    font-size: 16px;
+    padding: 5px;
+    line-height: 130%;
+    }
+
+    .msg {
+    padding: 3px;
+    line-height: 70%;
+    margin-left: 10px;
+    }
+
+    .time {
+    color: #777;
+    }
+</style>
+
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+    
+    <b>{{app_view.id}}, {{app_view.base}}</b>
+    <hr />
+	 
+    {% for event in events %}
+        <b>{{event.time.strftime("%Y-%m-%d %H:%M:%S")}}, {{event.sessionId}}, {{event.user}}, {{event.event}}</b>
+        {% for line in event.comment.split('\n') %}
+            <p>{{line}}</p>
+        {% endfor %}
+        <hr />
+    {% endfor %}
+
+<!--
+    {% if is_partial %}
+    <a href="messages\{{app}}">Полный список ошибок</a>
+    {% endif %}
+-->
+<!--    
+	{% for event in events.items %}
+
+        <p>{{event.time.strftime("%Y-%m-%d %H:%M:%S")}}, {{event.sessionId}}, {{event.user}}</p>
+        <p>{{event.event}}</p>
+        <p>{{event.comment}}</p>
+        <hr />
+	{% endfor %}
+
+    <ul class="pager">
+        {% if events.has_prev %}
+            <li class="previous"><a href="application\{{app}}\{{events.prev_num}}">Раньше</a></li>
+        {% else %}
+            <li class="previous disabled"><a href="#">Раньше</a></li>
+        {% endif %}
+        
+        {% if events.has_next %}
+            <li class="next"><a href="application\{{app}}\{{events.next_num}}">Позже</a></li>
+        {% else %}
+            <li class="next disabled"><a href="#">Позже</a></li>
+        {% endif %}
+    </ul>
+
+-->
+{% endblock %}
